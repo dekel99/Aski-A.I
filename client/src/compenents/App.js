@@ -10,6 +10,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import ResultContainer from './ResultContainer';
 import '../styles/App.scss';
 import HowToUse from './HowToUse';
+import { env } from '@tensorflow/tfjs-core';
 
 function App() {
   const [searchInput, setSearchInput] = useState()
@@ -33,7 +34,7 @@ function App() {
     try{
       setAskBtnLoading(true)
       const data = {searchInput, question}
-      const res = await axios({method: "POST", url: "http://localhost:4000", withCredentials: true, data})
+      const res = await axios({method: "POST", url: process.env.REACT_APP_SERVER_URL, withCredentials: true, data})
       const { answersRes } = res.data
       setAnswers(answersRes)
     } catch (err) {
